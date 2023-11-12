@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 struct SparseElement {
     int row;
@@ -71,13 +72,25 @@ public:
 };
 
 int main() {
-    SparseMatrix s(3,3);
-    s.insertElement(0, 0, 3);
-    s.insertElement(1, 2, 5);
-    s.insertElement(2, 1, 1);
-    s.insertElement(1, 0, 2);
-    s.insertElement(2, 1, 9);
-    s.insertElement(2, 2, 8);
+    int numRows, numCols;
+    cout << "Enter the number of rows: ";
+    cin >> numRows;
+    cout << "Enter the number of columns: ";
+    cin >> numCols;
+    SparseMatrix s(numRows,numCols);
+    vector<vector<int>> matrix(numRows, vector<int>(numCols));
+    for(int i=0;i<numRows;i++)
+    {
+        for(int j=0;j<numCols;j++)
+        {
+            cin>> matrix[i][j];
+            if(matrix[i][j]!=0)
+            {
+                s.insertElement(i, j, matrix[i][j]);
+            }
+        }
+    }
+    cout << "Sparse Matrix:" << endl;
     s.printSparseMatrix();
     return 0;
 }
